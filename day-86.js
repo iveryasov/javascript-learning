@@ -9,15 +9,16 @@ const deliveredOrdersButton = document.querySelector("#delivered-btn");
 const cheapOrdersButton = document.querySelector("#cheap-orders-btn");
 const expensiveOrdersButton = document.querySelector("#expensive-orders-btn");
 const timerText = document.querySelector("#timer");
+const searchInput = document.querySelector("#search-input");
 
 // Initial Orders Data
 const initialOrders = [
-  { id: 101, title: "Gaming Mouse", price: 2500, status: "in_transit" },
-  { id: 102, title: "Mechanical Keyboard", price: 7000, status: "delivered" },
-  { id: 103, title: "27-inch Monitor", price: 22000, status: "in_transit" },
-  { id: 104, title: "USB Type-C Cable", price: 600, status: "delivered" },
-  { id: 105, title: "Mouse Pad", price: 1200, status: "delivered" },
-  { id: 106, title: "Gaming Headset", price: 4500, status: "in_transit" }
+  { id: 101, title: "Gaming Mouse", price: 25, status: "in_transit" },
+  { id: 102, title: "Mechanical Keyboard", price: 70, status: "delivered" },
+  { id: 103, title: "27-inch Monitor", price: 220, status: "in_transit" },
+  { id: 104, title: "USB Type-C Cable", price: 6, status: "delivered" },
+  { id: 105, title: "Mouse Pad", price: 12, status: "delivered" },
+  { id: 106, title: "Gaming Headset", price: 45, status: "in_transit" }
 ];
 
 // Render Orders List
@@ -59,6 +60,13 @@ cheapOrdersButton.addEventListener("click", () => {
 expensiveOrdersButton.addEventListener("click", () => {
   const sortedProducts = [...initialOrders].sort((cheap, expen) => expen.price - cheap.price);
   render(sortedProducts);
+});
+
+// Search Product Logic
+searchInput.addEventListener("input", () => {
+    const userText = searchInput.value.trim().toLowerCase();
+    const filterTitles = initialOrders.filter(p => p.title.trim().toLowerCase().includes(userText));
+    render(filterTitles);
 });
 
 // Auto-Sync Timer
